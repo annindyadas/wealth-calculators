@@ -1,0 +1,182 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--fx-surface);
+    border-bottom: 1px solid var(--fx-border);
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--fx-space-4);
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-3) var(--fx-space-4);
+}
+
+.header__wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fx-space-2);
+    font-size: var(--fx-text-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fx-text-primary);
+    text-decoration: none;
+    margin-right: auto;
+}
+
+/* Flat accent square standing in for a logo mark. */
+.header__mark {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 5px;
+    background-color: var(--fx-accent);
+}
+
+.header__wordmark:focus-visible,
+.header__link:focus-visible,
+.header__cta:focus-visible,
+.header__icon-button:focus-visible,
+.panel__link:focus-visible,
+.panel__cta:focus-visible {
+    outline: none;
+    box-shadow: var(--fx-focus-ring);
+    border-radius: var(--fx-radius-control);
+}
+
+/* Mobile first: desktop nav, desktop search and CTA are hidden below 768px. */
+.header__nav,
+.header__search,
+.header__cta {
+    display: none;
+}
+
+.header__mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--fx-space-1);
+}
+
+.header__icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: none;
+    border: 1px solid var(--fx-border);
+    border-radius: var(--fx-radius-control);
+    cursor: pointer;
+}
+
+.header__icon-button:hover {
+    border-color: var(--fx-accent);
+}
+
+.header__mobile-search {
+    display: none;
+    padding: 0 var(--fx-space-4) var(--fx-space-3);
+    border-top: 1px solid var(--fx-border);
+}
+
+.header__mobile-search_open {
+    display: block;
+}
+
+.panel {
+    display: none;
+    padding: var(--fx-space-4);
+    border-top: 1px solid var(--fx-border);
+    background-color: var(--fx-surface-alt);
+}
+
+.panel_open {
+    display: block;
+}
+
+.panel__nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel__link {
+    padding: var(--fx-space-3) var(--fx-space-2);
+    font-size: var(--fx-text-md);
+    font-weight: 600;
+    color: var(--fx-text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--fx-border);
+}
+
+.panel__cta,
+.header__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-text-on-accent);
+    background-color: var(--fx-accent);
+    border: 1px solid var(--fx-accent);
+    border-radius: var(--fx-radius-control);
+    padding: var(--fx-space-3) var(--fx-space-4);
+    text-decoration: none;
+    min-height: 2.75rem;
+}
+
+.panel__cta {
+    width: 100%;
+    margin-top: var(--fx-space-4);
+    box-sizing: border-box;
+}
+
+.panel__cta:hover,
+.header__cta:hover {
+    background-color: var(--fx-accent-dark);
+    border-color: var(--fx-accent-dark);
+}
+
+@media (min-width: 48em) {
+    .header__nav {
+        display: flex;
+        align-items: center;
+        gap: var(--fx-space-2);
+    }
+
+    .header__search {
+        display: block;
+        width: 18rem;
+    }
+
+    .header__cta {
+        display: inline-flex;
+    }
+
+    .header__mobile-controls,
+    .header__mobile-search,
+    .panel {
+        display: none;
+    }
+
+    .header__link {
+        padding: var(--fx-space-2) var(--fx-space-3);
+        font-size: var(--fx-text-sm);
+        font-weight: 600;
+        color: var(--fx-text-secondary);
+        text-decoration: none;
+        border-radius: var(--fx-radius-control);
+    }
+
+    .header__link:hover {
+        color: var(--fx-accent);
+        background-color: var(--fx-accent-tint);
+    }
+}

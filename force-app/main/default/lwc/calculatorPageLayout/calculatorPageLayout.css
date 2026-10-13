@@ -1,0 +1,139 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+    background-color: var(--fx-surface-alt);
+}
+
+.page__inner {
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-5) var(--fx-space-4) var(--fx-space-6);
+}
+
+.crumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--fx-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--fx-text-xs);
+    color: var(--fx-text-secondary);
+}
+
+.crumbs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fx-space-2);
+}
+
+.crumbs__link {
+    color: var(--fx-text-secondary);
+    text-decoration: none;
+}
+
+.crumbs__link:hover {
+    color: var(--fx-accent);
+    text-decoration: underline;
+}
+
+.crumbs__link:focus-visible,
+.related__chip:focus-visible {
+    outline: none;
+    box-shadow: var(--fx-focus-ring);
+    border-radius: var(--fx-radius-control);
+}
+
+.crumbs__divider {
+    color: var(--fx-border-strong);
+}
+
+.crumbs__item_current {
+    font-weight: 600;
+    color: var(--fx-text-primary);
+}
+
+.page__header {
+    margin: var(--fx-space-4) 0 var(--fx-space-5);
+}
+
+.page__title {
+    margin: 0;
+    font-size: var(--fx-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--fx-text-primary);
+}
+
+.page__summary {
+    margin: var(--fx-space-2) 0 0;
+    font-size: var(--fx-text-md);
+    line-height: 1.55;
+    color: var(--fx-text-secondary);
+    max-width: 48rem;
+}
+
+/* Card shell around the calculator: border and surface, no shadow. */
+.page__main {
+    display: block;
+    background-color: var(--fx-surface);
+    border: 1px solid var(--fx-border);
+    border-radius: var(--fx-radius-card);
+    padding: var(--fx-space-4);
+}
+
+.related {
+    margin-top: var(--fx-space-6);
+    padding-top: var(--fx-space-5);
+    border-top: 1px solid var(--fx-border);
+}
+
+.related__heading {
+    margin: 0 0 var(--fx-space-3);
+    font-size: var(--fx-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fx-text-secondary);
+}
+
+.related__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--fx-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.related__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: var(--fx-space-2) var(--fx-space-4);
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-accent);
+    background-color: var(--fx-surface);
+    border: 1px solid var(--fx-border-strong);
+    border-radius: var(--fx-radius-pill);
+    text-decoration: none;
+}
+
+.related__chip:hover {
+    background-color: var(--fx-accent-tint);
+    border-color: var(--fx-accent);
+}
+
+@media (min-width: 48em) {
+    .page__inner {
+        padding: var(--fx-space-6) var(--fx-space-4) calc(var(--fx-space-6) * 2);
+    }
+
+    .page__main {
+        padding: var(--fx-space-5);
+    }
+}

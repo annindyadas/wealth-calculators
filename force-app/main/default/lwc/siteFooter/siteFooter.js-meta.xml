@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - Site Footer</masterLabel>
+    <description>Four-column footer on the deep neutral surface, with a bottom bar carrying copyright and the financial disclaimer.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="brandName"
+                type="String"
+                default="Finance"
+                label="Brand Name"
+                description="Used in the copyright line."
+            />
+            <property
+                name="sitePath"
+                type="String"
+                default="finance"
+                label="Site Path Prefix"
+                description="Internal link prefix without leading slash. Example: finance"
+            />
+            <property name="aboutHeading" type="String" default="About" label="About Heading" />
+            <property
+                name="aboutText"
+                type="String"
+                default="A suite of financial calculators for modelling investments, loans and retirement scenarios. Everything is computed in your browser."
+                label="About Text"
+            />
+            <property
+                name="calculatorsHeading"
+                type="String"
+                default="Calculators"
+                label="Calculators Heading"
+            />
+            <property
+                name="calculatorLinks"
+                type="String"
+                default="Compare Health Insurance Plan|/compareplan"
+                label="Calculator Links"
+                description="Top categories only. Comma separated Label|url pairs."
+            />
+            <property name="legalHeading" type="String" default="Legal" label="Legal Heading" />
+            <property
+                name="legalLinks"
+                type="String"
+                default="Disclaimer|/legal/disclaimer, Privacy Notice|/legal/privacy, Terms of Use|/legal/terms"
+                label="Legal Links"
+                description="Comma separated Label|url pairs."
+            />
+            <property
+                name="contactHeading"
+                type="String"
+                default="Contact"
+                label="Contact Heading"
+            />
+            <property
+                name="contactLinks"
+                type="String"
+                default="About Me|/portfolio/"
+                label="Contact and Social Links"
+                description="Comma separated Label|url pairs. Replace the REPLACE_ME social URLs."
+            />
+            <property
+                name="disclaimer"
+                type="String"
+                default="Calculations are illustrative only and do not constitute financial advice."
+                label="Financial Disclaimer"
+                description="Editable by legal without a deploy."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,17 @@
+<template>
+    <template lwc:if={hasRows}>
+        <p class="slds-text-title_caps slds-var-m-bottom_x-small">
+            {tableTitle}
+        </p>
+        <div class="table-scroll" style={tableStyle}>
+            <c-sip-datatable
+                key-field="year"
+                columns={columns}
+                data={tableRows}
+                hide-checkbox-column
+                column-widths-mode="auto"
+                aria-label={tableTitle}
+            ></c-sip-datatable>
+        </div>
+    </template>
+</template>

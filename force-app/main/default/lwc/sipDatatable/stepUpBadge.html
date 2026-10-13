@@ -1,0 +1,10 @@
+<template>
+    <template lwc:if={value}>
+        <span class="slds-badge slds-badge_lightest">
+            <span aria-hidden="true">↗&nbsp;</span>{value}
+            <span class="slds-assistive-text"
+                >{typeAttributes.assistiveLabel}</span
+            >
+        </span>
+    </template>
+</template>

@@ -1,0 +1,90 @@
+<template>
+    <header class="header" onkeydown={handleKeyDown}>
+        <div class="header__inner">
+            <a class="header__wordmark" href={wordmarkUrl}>
+                <span class="header__mark" aria-hidden="true"></span>
+                {wordmark}
+            </a>
+
+            <!-- Desktop navigation -->
+            <nav class="header__nav" aria-label="Main">
+                <template for:each={navLinks} for:item="link">
+                    <a key={link.key} class="header__link" href={link.url}
+                        >{link.label}</a
+                    >
+                </template>
+            </nav>
+
+            <div class="header__search">
+                <c-calculator-search-bar
+                    placeholder={searchPlaceholder}
+                    onsearch={handleSearch}
+                ></c-calculator-search-bar>
+            </div>
+
+            <template lwc:if={hasCta}>
+                <a class="header__cta" href={ctaUrl}>{ctaLabel}</a>
+            </template>
+
+            <!-- Mobile controls -->
+            <div class="header__mobile-controls">
+                <button
+                    class="header__icon-button"
+                    type="button"
+                    aria-label="Search"
+                    aria-expanded={mobileSearchOpen}
+                    onclick={toggleMobileSearch}
+                >
+                    <lightning-icon
+                        icon-name="utility:search"
+                        size="x-small"
+                    ></lightning-icon>
+                </button>
+                <button
+                    class="header__icon-button header__menu-button"
+                    type="button"
+                    aria-label={menuButtonLabel}
+                    aria-expanded={menuExpanded}
+                    aria-controls="site-menu-panel"
+                    onclick={toggleMenu}
+                >
+                    <lightning-icon
+                        icon-name={menuIcon}
+                        size="x-small"
+                    ></lightning-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile search drawer -->
+        <div class={mobileSearchClass}>
+            <c-calculator-search-bar
+                placeholder={searchPlaceholder}
+                onsearch={handleSearch}
+            ></c-calculator-search-bar>
+        </div>
+
+        <!-- Mobile slide-out panel -->
+        <div id="site-menu-panel" class={panelClass}>
+            <nav class="panel__nav" aria-label="Main">
+                <template for:each={navLinks} for:item="link">
+                    <a
+                        key={link.key}
+                        class="panel__link"
+                        href={link.url}
+                        onclick={handlePanelNavigate}
+                        >{link.label}</a
+                    >
+                </template>
+            </nav>
+            <template lwc:if={hasCta}>
+                <a
+                    class="panel__cta"
+                    href={ctaUrl}
+                    onclick={handlePanelNavigate}
+                    >{ctaLabel}</a
+                >
+            </template>
+        </div>
+    </header>
+</template>

@@ -1,0 +1,350 @@
+<template>
+    <section class="planner">
+        <header class="planner__header">
+            <h1 class="planner__title">Bucket Laddering Planner</h1>
+            <div class="planner__currency">
+                <lightning-combobox label="Currency" options={currencyOptions} value={currencyCode}
+                    onchange={handleCurrencyChange}></lightning-combobox>
+            </div>
+        </header>
+
+        <div class="planner__layout">
+            <div class="planner__left">
+                <lightning-card title="Profile & Timeline" class="planner__card">
+                    <div class="slds-p-around_medium section-grid">
+                        <div class="field">
+                            <label class="field__label" for="current-age">Current Age
+                                <lightning-helptext content="Your current age in years."></lightning-helptext>
+                            </label>
+                            <lightning-input id="current-age" type="number" variant="label-hidden"
+                                data-field="currentAge" value={state.currentAge} min="18" max="100"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="retirement-age">Retirement Age
+                                <lightning-helptext
+                                    content="Age when regular income stops and retirement expenses begin."></lightning-helptext>
+                            </label>
+                            <lightning-input id="retirement-age" type="number" variant="label-hidden"
+                                data-field="retirementAge" value={state.retirementAge} min="18" max="120"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="plan-until-age">Expenses Planned Until Age
+                                <lightning-helptext
+                                    content="Life expectancy age up to which corpus sustainability is projected."></lightning-helptext>
+                            </label>
+                            <lightning-input id="plan-until-age" type="number" variant="label-hidden"
+                                data-field="planUntilAge" value={state.planUntilAge} min="18" max="120"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+                </lightning-card>
+
+                <lightning-card title="Pre-Retirement Investing" class="planner__card">
+                    <div class="slds-p-around_medium section-grid">
+                        <div class="field">
+                            <label class="field__label" for="existing-corpus">Lumpsum / Existing Savings
+                                <lightning-helptext
+                                    content="Amount already invested today as the starting corpus."></lightning-helptext>
+                            </label>
+                            <lightning-input id="existing-corpus" type="text" variant="label-hidden"
+                                data-field="existingCorpus" value={existingCorpusInputValue}
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="monthly-sip">Monthly SIP
+                                <lightning-helptext
+                                    content="Monthly amount invested at the start of each month until retirement."></lightning-helptext>
+                            </label>
+                            <lightning-input id="monthly-sip" type="text" variant="label-hidden" data-field="monthlySip"
+                                value={monthlySipInputValue} onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="sip-stepup">Step-up Every Year (%)
+                                <lightning-helptext
+                                    content="Annual percentage increase applied to monthly SIP at the start of each year."></lightning-helptext>
+                            </label>
+                            <lightning-input id="sip-stepup" type="number" formatter="decimal" variant="label-hidden"
+                                data-field="sipStepUpPct" value={state.sipStepUpPct} min="0" step="0.01"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="pre-return">Annual Return Generated (%)
+                                <lightning-helptext
+                                    content="Expected annual return rate before retirement."></lightning-helptext>
+                            </label>
+                            <lightning-input id="pre-return" type="number" formatter="decimal" variant="label-hidden"
+                                data-field="preRetReturnPct" value={state.preRetReturnPct} step="0.01"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="inflation">Inflation (%)
+                                <lightning-helptext
+                                    content="Long-term inflation used for real value outputs and planned expense adjustment."></lightning-helptext>
+                            </label>
+                            <lightning-input id="inflation" type="number" formatter="decimal" variant="label-hidden"
+                                data-field="inflationPct" value={state.inflationPct} step="0.01" min="0"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+                </lightning-card>
+
+                <lightning-card title="Retirement Spending" class="planner__card">
+                    <div class="slds-p-around_medium section-grid">
+                        <div class="field">
+                            <label class="field__label" for="retirement-expense">Monthly Expense at Retirement Start
+                                <lightning-helptext
+                                    content="Monthly expense at retirement start (future value at retirement), before post-retirement yearly increase."></lightning-helptext>
+                            </label>
+                            <lightning-input id="retirement-expense" type="text" variant="label-hidden"
+                                data-field="monthlyExpenseAtRetirement" value={monthlyExpenseAtRetirementInputValue}
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="post-expense-increase">Expected Increase Post Retirement
+                                (%)
+                                <lightning-helptext
+                                    content="Annual percentage increase in retirement expenses."></lightning-helptext>
+                            </label>
+                            <lightning-input id="post-expense-increase" type="number" formatter="decimal"
+                                variant="label-hidden" data-field="postRetExpenseIncreasePct"
+                                value={state.postRetExpenseIncreasePct} min="0" step="0.01"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="tax-bracket">Expected Tax Bracket (%)
+                                <lightning-helptext
+                                    content="Used to estimate additional withdrawal needed for taxes during retirement."></lightning-helptext>
+                            </label>
+                            <lightning-input id="tax-bracket" type="number" formatter="decimal" variant="label-hidden"
+                                data-field="expectedTaxBracketPct" value={state.expectedTaxBracketPct} min="0" max="100"
+                                step="0.01" onchange={handleInputChange}></lightning-input>
+                        </div>
+
+                        <div class="field field_span-2">
+                            <div class="return-pair">
+                                <div class="field return-pair__input">
+                                    <label class="field__label" for="post-return">This Corpus, If It Grows By (%)
+                                        <lightning-helptext
+                                            content="Expected annual return on corpus during retirement years."></lightning-helptext>
+                                    </label>
+                                    <lightning-input id="post-return" type="number" formatter="decimal"
+                                        variant="label-hidden" data-field="postRetReturnPct"
+                                        value={state.postRetReturnPct} step="0.01" disabled={postRetReturnDisabled}
+                                        onchange={handleInputChange}></lightning-input>
+                                </div>
+
+                                <div class="field field_checkbox return-pair__checkbox">
+                                    <lightning-input type="checkbox" data-field="useSamePostRetReturn"
+                                        checked={state.useSamePostRetReturn} label="Use same return as pre-retirement"
+                                        onchange={handleInputChange}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+
+                <lightning-card title="Planned Additional Expenses" class="planner__card">
+                    <div class="slds-p-around_medium">
+                        <p class="section-note">
+                            Add one-time or recurring expenses. Use duration 1 for one-time expenses.
+                        </p>
+
+                        <template for:each={plannedExpenseRows} for:item="row">
+                            <div key={row.id} class="expense-row">
+                                <lightning-input type="text" label="Expense Name" data-id={row.id} data-field="name"
+                                    value={row.name} onchange={handlePlannedExpenseChange}></lightning-input>
+                                <div>
+                                    <lightning-input type="text" label="Amount" data-id={row.id} data-field="amount"
+                                        value={row.amountInputValue}
+                                        onchange={handlePlannedExpenseChange}></lightning-input>
+                                </div>
+                                <lightning-input type="number" label="Start Age" data-id={row.id} data-field="startAge"
+                                    value={row.startAge} min="0" max="120"
+                                    onchange={handlePlannedExpenseChange}></lightning-input>
+                                <lightning-input type="number" label="Duration (years)" data-id={row.id}
+                                    data-field="durationYears" value={row.durationYears} min="1" max="60"
+                                    onchange={handlePlannedExpenseChange}></lightning-input>
+                                <lightning-input type="text" label="Inflation Adjusted" value={row.adjustedAmountLabel}
+                                    disabled></lightning-input>
+                                <div class="expense-row__actions">
+                                    <lightning-button-icon icon-name="utility:delete" alternative-text="Remove row"
+                                        title="Remove row" data-id={row.id}
+                                        onclick={removePlannedExpense}></lightning-button-icon>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div class="slds-m-top_small">
+                            <lightning-button variant="neutral" label="Add Expense" icon-name="utility:add"
+                                onclick={addPlannedExpense}></lightning-button>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+
+            <aside class="planner__right">
+                <lightning-card title="Corpus Trajectory" class="planner__card">
+                    <div class="slds-p-around_medium">
+                        <template lwc:if={hasChartData}>
+                            <div class="chart-wrap">
+                                <svg class="corpus-chart" viewBox={chartViewBox} role="img" aria-label={chartAriaLabel}>
+                                    <g>
+                                        <line x1={corpusChart.axisLeft} y1={corpusChart.axisTop}
+                                            x2={corpusChart.axisLeft} y2={corpusChart.axisBottom}
+                                            class="corpus-chart__axis"></line>
+                                        <line x1={corpusChart.axisLeft} y1={corpusChart.axisBottom}
+                                            x2={corpusChart.axisRight} y2={corpusChart.axisBottom}
+                                            class="corpus-chart__axis"></line>
+
+                                        <template for:each={corpusChart.yTicks} for:item="tick">
+                                            <g key={tick.key}>
+                                                <line x1={corpusChart.axisLeft} y1={tick.y} x2={corpusChart.axisRight}
+                                                    y2={tick.y} class="corpus-chart__grid"></line>
+                                                <text x={tick.x} y={tick.y} class="corpus-chart__tick" text-anchor="end"
+                                                    alignment-baseline="middle">{tick.label}</text>
+                                            </g>
+                                        </template>
+
+                                        <path d={corpusChart.areaPath} class="corpus-chart__area"></path>
+                                        <path d={corpusChart.linePath} class="corpus-chart__line"></path>
+
+                                        <template for:each={corpusChart.points} for:item="point">
+                                            <circle key={point.key} cx={point.x} cy={point.y} r="4.2"
+                                                class="corpus-chart__point" data-tooltip={point.tooltipText}
+                                                onmouseenter={handleChartPointHover} onmouseleave={hideChartTooltip}>
+                                                <title>{point.tooltipText}</title>
+                                            </circle>
+                                        </template>
+
+                                        <template for:each={corpusChart.xTicks} for:item="tick">
+                                            <text key={tick.key} x={tick.x} y="270" class="corpus-chart__tick"
+                                                text-anchor="middle">{tick.label}</text>
+                                        </template>
+                                    </g>
+                                </svg>
+
+                            </div>
+
+                            <div class="chart-legend slds-m-top_small">
+                                <span class="chart-legend__item"><span
+                                        class="chart-legend__dot chart-legend__dot_line"></span>Corpus Left</span>
+                                <span class="chart-legend__item"><span
+                                        class="chart-legend__dot chart-legend__dot_area"></span>Trajectory Area</span>
+                            </div>
+
+                            <template lwc:if={hasChartTooltip}>
+                                <p class="chart-hover-readout slds-m-top_x-small">{chartTooltip.text}</p>
+                            </template>
+                        </template>
+                    </div>
+                </lightning-card>
+
+                <lightning-card title="Projection Summary" class="planner__card">
+                    <div class="slds-p-around_medium summary-grid">
+                        <template for:each={summaryCards} for:item="card">
+                            <article key={card.key} class="summary-item">
+                                <p class="summary-item__label">{card.label}</p>
+                                <p class={card.valueClass}>{card.value}</p>
+                            </article>
+                        </template>
+                    </div>
+                    <div class="slds-p-horizontal_medium slds-p-bottom_small">
+                        <p class={shortfallClass}>{shortfallLabel}</p>
+                    </div>
+                </lightning-card>
+            </aside>
+        </div>
+
+        <lightning-card class="planner__card">
+            <div class="slds-p-around_medium">
+                <div class="table-card-title">
+                    <span class="table-card-title__text">Yearly Projection Table</span>
+                    <div class="table-card-title__actions">
+                        <lightning-input type="checkbox" label="Show pre-retirement years"
+                            data-field="showAccumulationRows" checked={showAccumulationRows}
+                            onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+
+                <div class={tableWrapClass}>
+                    <template lwc:if={hasOutputRows}>
+                        <table
+                            class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped output-table">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Age</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Year</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Starting Corpus</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">SIP Amount</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Returns Generated</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Monthly Expense</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Annual Expense</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Additional Expense</div>
+                                    </th>
+                                    <th scope="col" class="output-table__head-cell">
+                                        <div class="slds-truncate">Corpus Left</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={outputRows} for:item="row">
+                                    <tr key={row.key} class={row.rowClass}>
+                                        <td>
+                                            <div class="slds-truncate">{row.age}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate">{row.year}</div>
+                                        </td>
+                                        <td><span class={row.startingCorpusClass}>{row.startingCorpusLabel}</span></td>
+                                        <td><span class={row.sipAmountClass}
+                                                title={row.sipAmountMonthlyHoverLabel}>{row.sipAmountLabel}</span></td>
+                                        <td><span class={row.returnsGeneratedClass}>{row.returnsGeneratedLabel}</span>
+                                        </td>
+                                        <td><span class={row.monthlyExpenseClass}>{row.monthlyExpenseLabel}</span></td>
+                                        <td><span class={row.annualExpenseClass}>{row.annualExpenseLabel}</span></td>
+                                        <td><span class={row.additionalExpenseClass}>{row.additionalExpenseLabel}</span>
+                                        </td>
+                                        <td><span class={row.corpusLeftClass}>{row.corpusLeftLabel}</span></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                </div>
+
+                <div class="table-controls-bottom">
+                    <lightning-combobox label="Rows" variant="label-hidden" options={rowLimitOptions}
+                        value={state.tableRowLimit} data-field="tableRowLimit"
+                        onchange={handleInputChange}></lightning-combobox>
+                </div>
+            </div>
+        </lightning-card>
+
+        <p class="planner__disclaimer">{disclaimer}</p>
+    </section>
+</template>

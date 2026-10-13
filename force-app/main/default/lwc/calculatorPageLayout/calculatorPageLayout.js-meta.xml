@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - Calculator Page Layout</masterLabel>
+    <description>Page chrome for a single calculator: breadcrumb, h1, a slot for the calculator, and a related-calculators strip.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="pageTitle"
+                type="String"
+                default="SIP &amp; Lumpsum Calculator"
+                label="Page Title (h1)"
+            />
+            <property
+                name="pageSummary"
+                type="String"
+                label="Page Summary"
+                description="Optional sentence under the title."
+            />
+            <property
+                name="breadcrumbs"
+                type="String"
+                default="Home|/, Calculators|/calculators"
+                label="Breadcrumbs"
+                description="Comma separated Label|url pairs. The current page title is appended automatically."
+            />
+            <property
+                name="relatedHeading"
+                type="String"
+                default="Related calculators"
+                label="Related Strip Heading"
+            />
+            <property
+                name="relatedCalculators"
+                type="String"
+                label="Related Calculators"
+                description="Comma separated Label|url pairs, e.g. Goal Planner|/calculators/goal-planner. Leave blank to hide the strip."
+            />
+            <property
+                name="hideDefaultCalculator"
+                type="Boolean"
+                default="false"
+                label="Hide Default Calculator"
+                description="The SIP and Lumpsum calculator renders inside this layout by default. Tick this on pages that host a different calculator."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

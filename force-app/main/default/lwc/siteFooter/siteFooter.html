@@ -1,0 +1,56 @@
+<template>
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__col">
+                <h2 class="footer__heading">{aboutHeading}</h2>
+                <p class="footer__text">{aboutText}</p>
+            </div>
+
+            <div class="footer__col">
+                <h2 class="footer__heading">{calculatorsHeading}</h2>
+                <ul class="footer__list">
+                    <template for:each={calculatorItems} for:item="link">
+                        <li key={link.key}>
+                            <a class="footer__link" href={link.url}
+                                >{link.label}</a
+                            >
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h2 class="footer__heading">{legalHeading}</h2>
+                <ul class="footer__list">
+                    <template for:each={legalItems} for:item="link">
+                        <li key={link.key}>
+                            <a class="footer__link" href={link.url}
+                                >{link.label}</a
+                            >
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h2 class="footer__heading">{contactHeading}</h2>
+                <ul class="footer__list">
+                    <template for:each={contactItems} for:item="link">
+                        <li key={link.key}>
+                            <a class="footer__link" href={link.url}
+                                >{link.label}</a
+                            >
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer__bar">
+            <div class="footer__bar-inner">
+                <p class="footer__copyright">{copyright}</p>
+                <p class="footer__disclaimer">{disclaimer}</p>
+            </div>
+        </div>
+    </footer>
+</template>

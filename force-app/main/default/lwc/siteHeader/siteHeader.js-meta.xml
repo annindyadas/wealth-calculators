@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - Site Header</masterLabel>
+    <description>Sticky site masthead: wordmark, up to three nav links, search and one CTA. Collapses to a hamburger below 768px.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="wordmark" type="String" default="Finance" label="Wordmark" />
+            <property name="wordmarkUrl" type="String" default="/" label="Wordmark URL" />
+            <property name="navOneLabel" type="String" default="Home" label="Nav 1 Label" />
+            <property name="navOneUrl" type="String" default="/" label="Nav 1 URL" />
+            <property
+                name="navTwoLabel"
+                type="String"
+                default="Calculators"
+                label="Nav 2 Label"
+            />
+            <property
+                name="navTwoUrl"
+                type="String"
+                default="/calculators"
+                label="Nav 2 URL"
+            />
+            <property
+                name="navThreeLabel"
+                type="String"
+                default="Insights"
+                label="Nav 3 Label"
+                description="Leave blank to hide this link."
+            />
+            <property
+                name="navThreeUrl"
+                type="String"
+                default="/insights"
+                label="Nav 3 URL"
+            />
+            <property
+                name="ctaLabel"
+                type="String"
+                default="Get started"
+                label="CTA Label"
+                description="Leave blank to hide the CTA button."
+            />
+            <property
+                name="ctaUrl"
+                type="String"
+                default="/calculators"
+                label="CTA URL"
+            />
+            <property
+                name="searchPlaceholder"
+                type="String"
+                default="Search calculators"
+                label="Search Placeholder"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

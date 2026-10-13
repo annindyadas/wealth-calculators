@@ -1,0 +1,231 @@
+<template>
+    <lightning-card>
+        <h1 slot="title" class="slds-text-heading_medium calculator-title">
+            SIP &amp; Lumpsum Investment Calculator
+        </h1>
+
+        <div slot="actions" class="currency-picker">
+            <lightning-combobox label={currencyAriaLabel} variant="label-hidden" dropdown-alignment="right"
+                options={currencyOptions} value={currencyCode} aria-label={currencyAriaLabel}
+                onchange={handleCurrencyChange}></lightning-combobox>
+        </div>
+
+        <div class="calculator slds-var-p-horizontal_medium">
+            <!-- Mode tabs -->
+            <div class="slds-tabs_default">
+                <ul class="slds-tabs_default__nav" role="tablist" aria-label="Calculator mode"
+                    onkeydown={handleTabKeyDown}>
+                    <template for:each={tabs} for:item="tab">
+                        <li key={tab.key} class={tab.cssClass} title={tab.label} role="presentation">
+                            <button class={tab.linkClass} type="button" role="tab" data-mode={tab.key}
+                                tabindex={tab.tabIndex} aria-selected={tab.ariaSelected} onclick={handleTabClick}>
+                                {tab.label}
+                            </button>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <p class="mode-summary slds-text-body_small slds-var-m-top_x-small" aria-live="polite">
+                {modeSummary}
+            </p>
+
+            <div class="slds-grid slds-wrap slds-gutters slds-var-m-top_medium">
+                <!-- ------------------------------------------------ Inputs -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                    <!-- Lumpsum first: it is the money you start with -->
+                    <template lwc:if={showLumpsumInput}>
+                        <div class="slds-form-element slds-var-m-bottom_medium">
+                            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                <label class="slds-form-element__label slds-var-m-bottom_none"
+                                    for="lumpsum-amount">{lumpsumLabel}</label>
+                                <lightning-input class="value-input" id="lumpsum-amount" type="text"
+                                    variant="label-hidden" data-field="lumpsumAmount" value={lumpsumAmountInputValue}
+                                    aria-label={lumpsumAriaLabel} onchange={handleValueChange}></lightning-input>
+                            </div>
+                            <lightning-input type="range" variant="label-hidden" label={lumpsumLabel}
+                                data-field="lumpsumAmount" data-source="slider" value={lumpsumAmount}
+                                min={bounds.lumpsum.min} max={bounds.lumpsum.max} step={bounds.lumpsum.step}
+                                aria-label={lumpsumAriaLabel} aria-valuemin={bounds.lumpsum.min}
+                                aria-valuemax={bounds.lumpsum.max} aria-valuenow={lumpsumAmount}
+                                onchange={handleValueChange}></lightning-input>
+                        </div>
+                    </template>
+
+                    <!-- Monthly investment amount -->
+                    <template lwc:if={showMonthlyInput}>
+                        <div class="slds-form-element slds-var-m-bottom_medium">
+                            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                <label class="slds-form-element__label slds-var-m-bottom_none"
+                                    for="monthly-amount">Monthly Investment Amount</label>
+                                <lightning-input class="value-input" id="monthly-amount" type="text"
+                                    variant="label-hidden" data-field="monthlyAmount" value={monthlyAmountInputValue}
+                                    aria-label={monthlyAriaLabel} onchange={handleValueChange}></lightning-input>
+                            </div>
+                            <lightning-input type="range" variant="label-hidden" label="Monthly Investment Amount"
+                                data-field="monthlyAmount" data-source="slider" value={monthlyAmount}
+                                min={bounds.monthly.min} max={bounds.monthly.max} step={bounds.monthly.step}
+                                aria-label={monthlyAriaLabel} aria-valuemin={bounds.monthly.min}
+                                aria-valuemax={bounds.monthly.max} aria-valuenow={monthlyAmount}
+                                onchange={handleValueChange}></lightning-input>
+                        </div>
+                    </template>
+
+                    <!-- Target maturity amount -->
+                    <template lwc:if={showTargetInput}>
+                        <div class="slds-form-element slds-var-m-bottom_medium">
+                            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                <label class="slds-form-element__label slds-var-m-bottom_none"
+                                    for="target-amount">Target Amount</label>
+                                <lightning-input class="value-input" id="target-amount" type="text"
+                                    variant="label-hidden" data-field="targetAmount" value={targetAmountInputValue}
+                                    aria-label={targetAriaLabel} onchange={handleValueChange}></lightning-input>
+                            </div>
+                            <lightning-input type="range" variant="label-hidden" label="Target Amount"
+                                data-field="targetAmount" data-source="slider" value={targetAmount}
+                                min={bounds.target.min} max={bounds.target.max} step={bounds.target.step}
+                                aria-label={targetAriaLabel} aria-valuemin={bounds.target.min}
+                                aria-valuemax={bounds.target.max} aria-valuenow={targetAmount}
+                                onchange={handleValueChange}></lightning-input>
+                        </div>
+                    </template>
+
+                    <!-- Expected annual growth rate -->
+                    <div class="slds-form-element slds-var-m-bottom_medium">
+                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                            <label class="slds-form-element__label slds-var-m-bottom_none" for="annual-rate">Expected
+                                Annual Growth Rate (%)</label>
+                            <lightning-input class="value-input" id="annual-rate" type="number" variant="label-hidden"
+                                data-field="annualRate" value={annualRate} min={bounds.rate.min} max={bounds.rate.max}
+                                step={bounds.rate.step} formatter="decimal" aria-label={rateAriaLabel}
+                                onchange={handleValueChange}></lightning-input>
+                        </div>
+                        <lightning-input type="range" variant="label-hidden" label="Expected Annual Growth Rate"
+                            data-field="annualRate" value={annualRate} min={bounds.rate.min} max={bounds.rate.max}
+                            step={bounds.rate.step} aria-label={rateAriaLabel} aria-valuemin={bounds.rate.min}
+                            aria-valuemax={bounds.rate.max} aria-valuenow={annualRate}
+                            onchange={handleValueChange}></lightning-input>
+                    </div>
+
+                    <!-- Duration -->
+                    <div class="slds-form-element slds-var-m-bottom_medium">
+                        <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                            <label class="slds-form-element__label slds-var-m-bottom_none"
+                                for="duration-years">Investment Duration (years)</label>
+                            <lightning-input class="value-input" id="duration-years" type="number"
+                                variant="label-hidden" data-field="durationYears" value={durationYears}
+                                min={durationMin} max={durationMax} step="1" formatter="decimal"
+                                aria-label={durationAriaLabel} onchange={handleValueChange}></lightning-input>
+                        </div>
+                        <lightning-input type="range" variant="label-hidden" label="Investment Duration"
+                            data-field="durationYears" value={durationYears} min={durationMin} max={durationMax}
+                            step="1" aria-label={durationAriaLabel} aria-valuemin={durationMin}
+                            aria-valuemax={durationMax} aria-valuenow={durationYears}
+                            onchange={handleValueChange}></lightning-input>
+                    </div>
+
+                    <!-- Step up -->
+                    <template lwc:if={showStepUpInput}>
+                        <div class="slds-form-element slds-var-m-bottom_medium">
+                            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                <label class="slds-form-element__label slds-var-m-bottom_none" for="step-up">Annual Step
+                                    Up (%)</label>
+                                <lightning-input class="value-input" id="step-up" type="number" variant="label-hidden"
+                                    data-field="stepUpPct" value={stepUpPct} min={bounds.stepUp.min}
+                                    max={bounds.stepUp.max} step={bounds.stepUp.step} formatter="decimal"
+                                    aria-label={stepUpAriaLabel} onchange={handleValueChange}></lightning-input>
+                            </div>
+                            <lightning-input type="range" variant="label-hidden" label="Annual Step Up"
+                                data-field="stepUpPct" value={stepUpPct} min={bounds.stepUp.min} max={bounds.stepUp.max}
+                                step={bounds.stepUp.step} aria-label={stepUpAriaLabel} aria-valuemin={bounds.stepUp.min}
+                                aria-valuemax={bounds.stepUp.max} aria-valuenow={stepUpPct}
+                                onchange={handleValueChange}></lightning-input>
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                Your monthly contribution increases by this much
+                                at the start of every year.
+                            </p>
+                        </div>
+                    </template>
+
+                    <!-- Inflation -->
+                    <div class="slds-form-element slds-var-m-bottom_medium">
+                        <lightning-input type="checkbox" label="Include inflation adjustment" checked={includeInflation}
+                            onchange={handleInflationToggle}></lightning-input>
+                        <template lwc:if={includeInflation}>
+                            <div class="slds-var-m-top_x-small">
+                                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                    <label class="slds-form-element__label slds-var-m-bottom_none"
+                                        for="inflation-rate">Expected Inflation Rate (%)</label>
+                                    <lightning-input class="value-input" id="inflation-rate" type="number"
+                                        variant="label-hidden" data-field="inflationRate" value={inflationRate}
+                                        min={bounds.inflation.min} max={bounds.inflation.max}
+                                        step={bounds.inflation.step} formatter="decimal" aria-label={inflationAriaLabel}
+                                        onchange={handleValueChange}></lightning-input>
+                                </div>
+                                <lightning-input type="range" variant="label-hidden" label="Expected Inflation Rate"
+                                    data-field="inflationRate" value={inflationRate} min={bounds.inflation.min}
+                                    max={bounds.inflation.max} step={bounds.inflation.step}
+                                    aria-label={inflationAriaLabel} aria-valuemin={bounds.inflation.min}
+                                    aria-valuemax={bounds.inflation.max} aria-valuenow={inflationRate}
+                                    onchange={handleValueChange}></lightning-input>
+                            </div>
+                        </template>
+                        <template lwc:if={showCompoundingFrequencyInput}>
+                            <div class="slds-var-m-top_small">
+                                <lightning-combobox class="compounding-frequency-input" name="compounding-frequency"
+                                    label="Compounding Frequency" options={compoundingFrequencyOptions}
+                                    value={compoundingFrequency} aria-label={compoundingFrequencyAriaLabel}
+                                    onchange={handleCompoundingFrequencyChange}></lightning-combobox>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- ----------------------------------------------- Results -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                    <div class="result-panel slds-box slds-box_x-small slds-theme_shade" aria-live="polite">
+                        <p class="slds-text-heading_small headline">
+                            {headline}
+                        </p>
+                        <p class="slds-text-body_regular slds-var-m-top_x-small">
+                            {subline}
+                        </p>
+                        <p class="slds-text-body_small slds-text-color_weak slds-var-m-top_xx-small">
+                            {rateSummary}
+                        </p>
+                        <template lwc:if={includeInflation}>
+                            <p class="slds-var-m-top_x-small inflation-line">
+                                In today's money that is about <strong
+                                    class="inflation-line__value">{inflationRealValueLabel}</strong>,
+                                assuming <strong class="inflation-line__value">{inflationRateLabel}</strong> average
+                                inflation.
+                            </p>
+                        </template>
+                    </div>
+
+                    <template lwc:if={hasProjection}>
+                        <c-sip-growth-chart class="slds-var-m-top_medium" series={chartSeries}
+                            currency-code={currencyCode}></c-sip-growth-chart>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Scenario comparison -->
+            <template lwc:if={displayScenarioCards}>
+                <c-sip-scenario-cards class="slds-var-m-top_medium" scenarios={scenarios}
+                    selected-key={selectedScenarioKey} currency-code={currencyCode}
+                    onscenarioselect={handleScenarioSelect}></c-sip-scenario-cards>
+            </template>
+
+            <!-- Year by year table -->
+            <template lwc:if={hasProjection}>
+                <c-sip-yearly-breakdown class="slds-var-m-top_medium" rows={breakdownRows} currency-code={currencyCode}
+                    show-step-up={showStepUpInput}></c-sip-yearly-breakdown>
+            </template>
+        </div>
+
+        <p slot="footer" class="slds-text-body_small slds-text-color_weak disclaimer">
+            {disclaimer}
+        </p>
+    </lightning-card>
+</template>

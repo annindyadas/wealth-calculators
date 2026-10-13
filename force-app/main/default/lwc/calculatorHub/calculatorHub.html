@@ -1,0 +1,38 @@
+<template>
+    <section class="hub" aria-labelledby="hub-heading">
+        <header class="hub__header">
+            <!-- <h2 id="hub-heading" class="hub__title">{heading}</h2> -->
+            <p class="hub__subtitle">{subheading}</p>
+        </header>
+
+        <div class="hub__controls">
+            <c-calculator-search-bar placeholder={searchPlaceholder} value={searchTerm}
+                onsearch={handleSearch}></c-calculator-search-bar>
+            <c-category-filter-bar categories={categories} selected={selectedCategory}
+                oncategoryselect={handleCategorySelect}></c-category-filter-bar>
+        </div>
+
+        <p class="hub__count" aria-live="polite">{resultCountLabel}</p>
+
+        <template lwc:if={hasResults}>
+            <ul class="hub__grid">
+                <template for:each={visibleCalculators} for:item="calculator">
+                    <li key={calculator.id} class="hub__grid-item">
+                        <c-calculator-card name={calculator.name} description={calculator.description}
+                            category={calculator.category} icon-name={calculator.iconName}
+                            target-url={calculator.targetUrl} is-enabled={calculator.isEnabled}></c-calculator-card>
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+        <template lwc:else>
+            <div class="hub__empty">
+                <p class="hub__empty-text">{emptyStateMessage}</p>
+                <button class="hub__empty-action" type="button" onclick={handleClearFilters}>
+                    Clear filters
+                </button>
+            </div>
+        </template>
+    </section>
+</template>

@@ -1,0 +1,102 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+}
+
+/* Deep neutral from the token palette, not a one-off hex. */
+.footer {
+    background-color: var(--fx-surface-inverse);
+    color: var(--fx-text-inverse);
+}
+
+.footer__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--fx-space-5);
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-6) var(--fx-space-4);
+}
+
+.footer__heading {
+    margin: 0 0 var(--fx-space-3);
+    font-size: var(--fx-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fx-text-inverse);
+    opacity: 0.75;
+}
+
+.footer__text {
+    margin: 0;
+    font-size: var(--fx-text-sm);
+    line-height: 1.6;
+    color: var(--fx-text-inverse);
+    max-width: 24rem;
+}
+
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fx-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer__link {
+    font-size: var(--fx-text-sm);
+    color: var(--fx-text-inverse);
+    text-decoration: none;
+}
+
+.footer__link:hover {
+    text-decoration: underline;
+}
+
+.footer__link:focus-visible {
+    outline: 2px solid var(--fx-text-inverse);
+    outline-offset: 2px;
+    border-radius: var(--fx-radius-control);
+}
+
+.footer__bar {
+    border-top: 1px solid rgba(232, 237, 236, 0.18);
+}
+
+.footer__bar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fx-space-2);
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-4);
+}
+
+.footer__copyright,
+.footer__disclaimer {
+    margin: 0;
+    font-size: var(--fx-text-xs);
+    line-height: 1.5;
+    color: var(--fx-text-inverse);
+}
+
+.footer__disclaimer {
+    opacity: 0.8;
+}
+
+@media (min-width: 48em) {
+    .footer__inner {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: var(--fx-space-6);
+    }
+
+    .footer__bar-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--fx-space-5);
+    }
+}

@@ -1,0 +1,52 @@
+<template>
+    <template lwc:if={hasCards}>
+        <p class="slds-text-title_caps slds-var-m-bottom_x-small">
+            {groupLabel}
+        </p>
+        <div
+            class="slds-grid slds-wrap slds-gutters_x-small"
+            role="radiogroup"
+            aria-label={groupLabel}
+        >
+            <template for:each={cards} for:item="card">
+                <div
+                    key={card.key}
+                    class="slds-col slds-size_1-of-1 slds-small-size_1-of-3"
+                >
+                    <div
+                        class={card.cssClass}
+                        role="radio"
+                        data-key={card.key}
+                        tabindex={card.tabIndex}
+                        aria-checked={card.ariaChecked}
+                        onclick={handleSelect}
+                        onkeydown={handleKeyDown}
+                    >
+                        <div
+                            class="slds-grid slds-grid_vertical-align-center slds-var-m-bottom_xx-small"
+                        >
+                            <span
+                                class={card.indicatorClass}
+                                aria-hidden="true"
+                            ></span>
+                            <span class="slds-text-body_small card-label"
+                                >{card.label}</span
+                            >
+                        </div>
+                        <p class="slds-text-heading_small card-value">
+                            {card.formattedValue}
+                        </p>
+                        <p
+                            class="slds-text-body_small slds-text-color_weak card-rate"
+                        >
+                            {card.rateLabel}
+                        </p>
+                        <p class="slds-text-body_small slds-text-color_weak">
+                            {card.returnsLabel}
+                        </p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

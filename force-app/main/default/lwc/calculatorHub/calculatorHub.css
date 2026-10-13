@@ -1,0 +1,117 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+    background-color: var(--fx-surface);
+    color: var(--fx-text-primary);
+}
+
+.hub {
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-6) var(--fx-space-4);
+}
+
+.hub__title {
+    margin: 0;
+    font-size: var(--fx-text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.hub__subtitle {
+    margin: var(--fx-space-2) 0 0;
+    font-size: var(--fx-text-md);
+    color: var(--fx-text-secondary);
+    max-width: 44rem;
+}
+
+.hub__controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fx-space-3);
+    margin-top: var(--fx-space-5);
+}
+
+.hub__count {
+    margin: var(--fx-space-4) 0 var(--fx-space-3);
+    font-size: var(--fx-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fx-text-secondary);
+}
+
+/* Mobile first: one column, reflowing to 2 then 3 then 4. */
+.hub__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--fx-space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hub__grid-item {
+    display: block;
+}
+
+.hub__empty {
+    border: 1px dashed var(--fx-border-strong);
+    border-radius: var(--fx-radius-card);
+    background-color: var(--fx-surface-alt);
+    padding: var(--fx-space-6) var(--fx-space-4);
+    text-align: center;
+}
+
+.hub__empty-text {
+    margin: 0 0 var(--fx-space-3);
+    color: var(--fx-text-secondary);
+    font-size: var(--fx-text-md);
+}
+
+.hub__empty-action {
+    font: inherit;
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-text-on-accent);
+    background-color: var(--fx-accent);
+    border: 1px solid var(--fx-accent);
+    border-radius: var(--fx-radius-control);
+    padding: var(--fx-space-2) var(--fx-space-4);
+    cursor: pointer;
+}
+
+.hub__empty-action:hover {
+    background-color: var(--fx-accent-dark);
+    border-color: var(--fx-accent-dark);
+}
+
+.hub__empty-action:focus-visible {
+    outline: none;
+    box-shadow: var(--fx-focus-ring);
+}
+
+@media (min-width: 48em) {
+    .hub__controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--fx-space-4);
+    }
+
+    .hub__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 64em) {
+    .hub__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 80em) {
+    .hub__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

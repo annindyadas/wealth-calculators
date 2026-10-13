@@ -1,0 +1,15 @@
+:host {
+    display: block;
+}
+
+/*
+ * Long durations (up to 40 years) scroll rather than stretching the page.
+ * The height is set inline from the row count and the datatable does its own
+ * scrolling inside it - that is what keeps the column headers pinned. Scrolling
+ * this wrapper instead would carry the header away with the rows.
+ */
+.table-scroll {
+    border: 1px solid #e5e5e5;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}

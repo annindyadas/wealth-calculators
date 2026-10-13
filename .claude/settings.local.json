@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\"--- eslint ---\")",
+      "PowerShell(sf org list --json 2>$null | ConvertFrom-Json | ForEach-Object { $_.result.PSObject.Properties | ForEach-Object { $_.Value | Select-Object alias, username, isDefaultUsername, instanceUrl } } | Format-Table -AutoSize)"
+    ]
+  }
+}

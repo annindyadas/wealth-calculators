@@ -1,0 +1,18 @@
+<template>
+    <template lwc:if={hasChips}>
+        <div class="chips" role="group" aria-label={groupLabel}>
+            <template for:each={chips} for:item="chip">
+                <button
+                    key={chip.key}
+                    class={chip.cssClass}
+                    type="button"
+                    data-category={chip.key}
+                    aria-pressed={chip.pressed}
+                    onclick={handleClick}
+                >
+                    {chip.label}
+                </button>
+            </template>
+        </div>
+    </template>
+</template>

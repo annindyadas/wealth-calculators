@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - Calculator Hub</masterLabel>
+    <description>Searchable, filterable grid of every calculator on the site. Add new calculators by editing calculatorCatalog.js.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <!-- <property
+                name="heading"
+                type="String"
+                default="Calculators"
+                label="Heading"
+            /> -->
+            <property
+                name="subheading"
+                type="String"
+                default="Pick a calculator to model a scenario. Everything runs in your browser."
+                label="Sub-heading"
+            />
+            <property
+                name="searchPlaceholder"
+                type="String"
+                default="Search calculators"
+                label="Search Placeholder"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - SIP and Lumpsum Investment Calculator</masterLabel>
+    <description>Projects the maturity value of a SIP, a lumpsum, or both, with optional annual step-up, inflation adjustment and a reverse target-amount solve.</description>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig
+            targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage"
+        >
+            <property
+                name="defaultCurrencyCode"
+                type="String"
+                default="USD"
+                datasource="USD,INR,EUR"
+                label="Default Currency"
+                description="Currency selected when the calculator loads. Users can switch it from the picker in the component header."
+            />
+            <property
+                name="defaultAnnualRate"
+                type="Integer"
+                default="12"
+                min="1"
+                max="30"
+                label="Default Annual Growth Rate (%)"
+            />
+            <property
+                name="minDurationYears"
+                type="Integer"
+                default="1"
+                min="1"
+                label="Minimum Duration (years)"
+            />
+            <property
+                name="maxDurationYears"
+                type="Integer"
+                default="40"
+                min="1"
+                label="Maximum Duration (years)"
+            />
+            <property
+                name="defaultCompoundingFrequency"
+                type="String"
+                default="monthly"
+                datasource="monthly,quarterly,semi-annually,annually"
+                label="Default Compounding Frequency"
+            />
+            <property
+                name="scenarioOffset"
+                type="Integer"
+                default="2"
+                min="1"
+                max="10"
+                label="Scenario Rate Offset (+/- %)"
+            />
+            <property
+                name="showLumpsumTab"
+                type="Boolean"
+                default="true"
+                label="Show Lumpsum Tabs"
+            />
+            <property
+                name="showStepUp"
+                type="Boolean"
+                default="true"
+                label="Show Step-Up Slider"
+            />
+            <property
+                name="showScenarioCards"
+                type="Boolean"
+                default="true"
+                label="Show Scenario Comparison Cards"
+            />
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="defaultCurrencyCode"
+                type="String"
+                default="USD"
+                datasource="USD,INR,EUR"
+                label="Default Currency"
+                description="Currency selected when the calculator loads. Users can switch it from the picker in the component header."
+            />
+            <!--
+                Deprecated, superseded by defaultCurrencyCode. Retained because
+                Experience Builder pages already reference it and Salesforce
+                rejects removing an in-use property. Leave blank.
+            -->
+            <property
+                name="defaultCurrencySymbol"
+                type="String"
+                datasource="₹,$"
+                label="Currency Symbol (deprecated - use Default Currency)"
+            />
+            <property
+                name="defaultAnnualRate"
+                type="Integer"
+                default="12"
+                label="Default Annual Growth Rate (%)"
+            />
+            <property
+                name="minDurationYears"
+                type="Integer"
+                default="1"
+                label="Minimum Duration (years)"
+            />
+            <property
+                name="maxDurationYears"
+                type="Integer"
+                default="40"
+                label="Maximum Duration (years)"
+            />
+            <property
+                name="defaultCompoundingFrequency"
+                type="String"
+                default="monthly"
+                datasource="monthly,quarterly,semi-annually,annually"
+                label="Default Compounding Frequency"
+            />
+            <property
+                name="scenarioOffset"
+                type="Integer"
+                default="2"
+                label="Scenario Rate Offset (+/- %)"
+            />
+            <property
+                name="showLumpsumTab"
+                type="Boolean"
+                default="true"
+                label="Show Lumpsum Tabs"
+            />
+            <property
+                name="showStepUp"
+                type="Boolean"
+                default="true"
+                label="Show Step-Up Slider"
+            />
+            <property
+                name="showScenarioCards"
+                type="Boolean"
+                default="true"
+                label="Show Scenario Comparison Cards"
+            />
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property
+                name="defaultCurrencyCode"
+                type="String"
+                default="USD"
+                label="Default Currency (USD, INR or EUR)"
+                role="inputOnly"
+            />
+            <property
+                name="defaultAnnualRate"
+                type="Integer"
+                default="12"
+                label="Default Annual Growth Rate (%)"
+                role="inputOnly"
+            />
+            <property
+                name="minDurationYears"
+                type="Integer"
+                default="1"
+                label="Minimum Duration (years)"
+                role="inputOnly"
+            />
+            <property
+                name="maxDurationYears"
+                type="Integer"
+                default="40"
+                label="Maximum Duration (years)"
+                role="inputOnly"
+            />
+            <property
+                name="defaultCompoundingFrequency"
+                type="String"
+                default="monthly"
+                label="Default Compounding Frequency (monthly, quarterly, semi-annually, annually)"
+                role="inputOnly"
+            />
+            <property
+                name="scenarioOffset"
+                type="Integer"
+                default="2"
+                label="Scenario Rate Offset (+/- %)"
+                role="inputOnly"
+            />
+            <property
+                name="showLumpsumTab"
+                type="Boolean"
+                default="true"
+                label="Show Lumpsum Tabs"
+                role="inputOnly"
+            />
+            <property
+                name="showStepUp"
+                type="Boolean"
+                default="true"
+                label="Show Step-Up Slider"
+                role="inputOnly"
+            />
+            <property
+                name="showScenarioCards"
+                type="Boolean"
+                default="true"
+                label="Show Scenario Comparison Cards"
+                role="inputOnly"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

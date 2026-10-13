@@ -1,0 +1,87 @@
+:host {
+    display: block;
+}
+
+.chart-wrapper {
+    width: 100%;
+}
+
+/* Responsive: the SVG scales with its container via the viewBox. */
+.chart {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.legend {
+    font-size: 0.75rem;
+    color: #444746;
+}
+
+.swatch {
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 0.125rem;
+    margin-right: 0.25rem;
+    vertical-align: -0.1rem;
+}
+
+.swatch-invested {
+    background-color: #0b5cab;
+}
+
+.swatch-interest {
+    background-color: #04844b;
+}
+
+.gridline {
+    stroke: #e5e5e5;
+    stroke-width: 1;
+}
+
+.axis {
+    stroke: #c9c9c9;
+    stroke-width: 1;
+}
+
+.axis-label {
+    fill: #444746;
+    font-size: 12px;
+}
+
+.axis-title {
+    fill: #444746;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Total value band (principal + interest). */
+.area-total {
+    fill: rgba(4, 132, 75, 0.22);
+}
+
+.line-total {
+    fill: none;
+    stroke: #04844b;
+    stroke-width: 2;
+}
+
+.dot-total {
+    fill: #04844b;
+}
+
+/* Principal band, drawn on top so the gap above it reads as interest. */
+.area-invested {
+    fill: rgba(11, 92, 171, 0.35);
+}
+
+.line-invested {
+    fill: none;
+    stroke: #0b5cab;
+    stroke-width: 2;
+}
+
+.dot-invested {
+    fill: #0b5cab;
+}

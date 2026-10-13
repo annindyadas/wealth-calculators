@@ -1,0 +1,48 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--fx-space-2);
+}
+
+.chip {
+    font: inherit;
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-text-secondary);
+    background-color: var(--fx-surface);
+    border: 1px solid var(--fx-border-strong);
+    border-radius: var(--fx-radius-pill);
+    padding: var(--fx-space-2) var(--fx-space-4);
+    min-height: 2.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.chip:hover {
+    border-color: var(--fx-accent);
+    color: var(--fx-accent);
+}
+
+/* Flat solid fill for the active chip - no gradient, no shadow. */
+.chip_active {
+    color: var(--fx-text-on-accent);
+    background-color: var(--fx-accent);
+    border-color: var(--fx-accent);
+}
+
+.chip_active:hover {
+    color: var(--fx-text-on-accent);
+    background-color: var(--fx-accent-dark);
+    border-color: var(--fx-accent-dark);
+}
+
+.chip:focus-visible {
+    outline: none;
+    box-shadow: var(--fx-focus-ring);
+}

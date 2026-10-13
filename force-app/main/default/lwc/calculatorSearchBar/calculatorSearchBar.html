@@ -1,0 +1,21 @@
+<template>
+    <div class="search" role="search">
+        <label class="search__label" for="calculator-search">{label}</label>
+        <span class="search__icon" aria-hidden="true">
+            <lightning-icon
+                icon-name="utility:search"
+                size="x-small"
+            ></lightning-icon>
+        </span>
+        <input
+            id="calculator-search"
+            class="search__input"
+            type="search"
+            autocomplete="off"
+            placeholder={placeholder}
+            value={value}
+            oninput={handleInput}
+            onkeydown={handleKeyDown}
+        />
+    </div>
+</template>

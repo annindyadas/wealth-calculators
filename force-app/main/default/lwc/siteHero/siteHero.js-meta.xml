@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Finance - Site Hero</masterLabel>
+    <description>Flat accent-tinted hero band with configurable copy, CTA and an optional featured calculator card. Owns the page h1.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="heading"
+                type="String"
+                default="Model your money before you commit to it"
+                label="Heading (page h1)"
+            />
+            <property
+                name="subheading"
+                type="String"
+                default="A suite of calculators for investing, borrowing and retirement planning. No sign-in, no data leaves your browser."
+                label="Sub-heading"
+            />
+            <!-- <property
+                name="ctaLabel"
+                type="String"
+                default="Browse calculators"
+                label="CTA Label"
+                description="Leave blank to hide the CTA."
+            />
+            <property
+                name="ctaUrl"
+                type="String"
+                default="/calculators"
+                label="CTA URL"
+            />
+            <property
+                name="featuredEyebrow"
+                type="String"
+                default="Featured calculator"
+                label="Featured Card Eyebrow"
+            />
+            <property
+                name="featuredName"
+                type="String"
+                label="Featured Calculator Name"
+                description="Leave blank to hide the featured card."
+            />
+            <property
+                name="featuredIconName"
+                type="String"
+                default="utility:trending"
+                label="Featured Calculator Icon"
+                description="SLDS icon name, e.g. utility:trending."
+            />
+            <property
+                name="featuredUrl"
+                type="String"
+                label="Featured Calculator URL"
+            /> -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

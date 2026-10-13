@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Finance Design Tokens</masterLabel>
+    <description>CSS module holding the shared design tokens. Imported by every site component; never placed on a page.</description>
+</LightningComponentBundle>

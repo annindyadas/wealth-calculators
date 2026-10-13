@@ -1,0 +1,142 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+}
+
+/* Flat accent tint, deliberately not a gradient. */
+.hero {
+    background-color: var(--fx-accent-tint);
+    border-bottom: 1px solid var(--fx-border);
+}
+
+.hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fx-space-5);
+    max-width: var(--fx-max-width);
+    margin: 0 auto;
+    padding: var(--fx-space-6) var(--fx-space-4);
+}
+
+.hero__heading {
+    margin: 0;
+    font-size: var(--fx-text-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--fx-text-primary);
+    max-width: 34rem;
+}
+
+.hero__subheading {
+    margin: var(--fx-space-3) 0 0;
+    font-size: var(--fx-text-md);
+    line-height: 1.55;
+    color: var(--fx-text-secondary);
+    max-width: 34rem;
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: var(--fx-space-5);
+    padding: var(--fx-space-3) var(--fx-space-5);
+    min-height: 2.75rem;
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-text-on-accent);
+    background-color: var(--fx-accent);
+    border: 1px solid var(--fx-accent);
+    border-radius: var(--fx-radius-control);
+    text-decoration: none;
+}
+
+.hero__cta:hover {
+    background-color: var(--fx-accent-dark);
+    border-color: var(--fx-accent-dark);
+}
+
+.hero__cta:focus-visible,
+.featured:focus-visible {
+    outline: none;
+    box-shadow: var(--fx-focus-ring);
+}
+
+.featured {
+    display: flex;
+    flex-direction: column;
+    gap: var(--fx-space-3);
+    padding: var(--fx-space-5);
+    background-color: var(--fx-surface);
+    border: 1px solid var(--fx-border);
+    border-radius: var(--fx-radius-card);
+    text-decoration: none;
+    color: var(--fx-text-primary);
+}
+
+.featured:hover {
+    border-color: var(--fx-accent);
+}
+
+.featured__eyebrow {
+    font-size: var(--fx-text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fx-accent);
+}
+
+.featured__body {
+    display: flex;
+    align-items: center;
+    gap: var(--fx-space-3);
+}
+
+.featured__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: var(--fx-radius-control);
+    background-color: var(--fx-accent);
+}
+
+.featured__name {
+    font-size: var(--fx-text-lg);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.featured__action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--fx-space-1);
+    font-size: var(--fx-text-sm);
+    font-weight: 600;
+    color: var(--fx-accent);
+}
+
+@media (min-width: 48em) {
+    .hero__inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--fx-space-6);
+        padding: calc(var(--fx-space-6) * 2) var(--fx-space-4);
+    }
+
+    .hero__copy {
+        flex: 1 1 60%;
+    }
+
+    .featured {
+        flex: 0 0 20rem;
+    }
+
+    .hero__heading {
+        font-size: 2.5rem;
+    }
+}

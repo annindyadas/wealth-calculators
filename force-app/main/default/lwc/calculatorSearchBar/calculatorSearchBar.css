@@ -1,0 +1,59 @@
+@import 'c/financeDesignTokens';
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Visible label would repeat the placeholder; keep it for assistive tech only. */
+.search__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.search__icon {
+    position: absolute;
+    left: var(--fx-space-3);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.search__input {
+    width: 100%;
+    font: inherit;
+    font-size: var(--fx-text-sm);
+    color: var(--fx-text-primary);
+    background-color: var(--fx-surface);
+    border: 1px solid var(--fx-border-strong);
+    border-radius: var(--fx-radius-control);
+    padding: var(--fx-space-3) var(--fx-space-3) var(--fx-space-3)
+        var(--fx-space-6);
+    min-height: 2.75rem;
+}
+
+.search__input::placeholder {
+    color: var(--fx-text-secondary);
+}
+
+.search__input:focus-visible {
+    outline: none;
+    border-color: var(--fx-accent);
+    box-shadow: var(--fx-focus-ring);
+}
+
+@media (min-width: 48em) {
+    :host {
+        max-width: 22rem;
+    }
+}

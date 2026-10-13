@@ -1,0 +1,115 @@
+<template>
+    <template lwc:if={hasData}>
+        <div class="chart-wrapper">
+            <div
+                class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-var-m-bottom_x-small"
+            >
+                <p class="slds-text-title_caps">{chartTitle}</p>
+                <ul class="legend slds-list_horizontal" aria-hidden="true">
+                    <li class="slds-var-m-right_small">
+                        <span class="swatch swatch-invested"></span>
+                        {investedLegend}
+                    </li>
+                    <li>
+                        <span class="swatch swatch-interest"></span>
+                        {interestLegend}
+                    </li>
+                </ul>
+            </div>
+
+            <svg
+                class="chart"
+                viewBox={viewBox}
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                aria-label={ariaSummary}
+                focusable="false"
+            >
+                <!-- Horizontal gridlines + y axis labels -->
+                <template for:each={chart.yTicks} for:item="tick">
+                    <g key={tick.key}>
+                        <line
+                            class="gridline"
+                            x1={tick.x1}
+                            y1={tick.y}
+                            x2={tick.x2}
+                            y2={tick.y}
+                        ></line>
+                        <text
+                            class="axis-label"
+                            x={tick.labelX}
+                            y={tick.y}
+                            text-anchor="end"
+                            dominant-baseline="middle"
+                        >
+                            {tick.label}
+                        </text>
+                    </g>
+                </template>
+
+                <!-- Total value area sits behind the invested area, so the
+                     visible band between the two lines is interest earned. -->
+                <path class="area-total" d={chart.totalArea}></path>
+                <path class="area-invested" d={chart.investedArea}></path>
+                <path class="line-total" d={chart.totalLine}></path>
+                <path class="line-invested" d={chart.investedLine}></path>
+
+                <!-- Axes -->
+                <line
+                    class="axis"
+                    x1={chart.axisX.x1}
+                    y1={chart.axisX.y1}
+                    x2={chart.axisX.x2}
+                    y2={chart.axisX.y2}
+                ></line>
+                <line
+                    class="axis"
+                    x1={chart.axisY.x1}
+                    y1={chart.axisY.y1}
+                    x2={chart.axisY.x2}
+                    y2={chart.axisY.y2}
+                ></line>
+
+                <!-- Year labels -->
+                <template for:each={chart.xTicks} for:item="tick">
+                    <text
+                        key={tick.key}
+                        class="axis-label"
+                        x={tick.x}
+                        y={tick.y}
+                        text-anchor="middle"
+                    >
+                        {tick.label}
+                    </text>
+                </template>
+                <text
+                    class="axis-title"
+                    x={chart.xAxisLabel.x}
+                    y={chart.xAxisLabel.y}
+                    text-anchor="middle"
+                >
+                    Years
+                </text>
+
+                <!-- Data points with native tooltips -->
+                <template for:each={chart.points} for:item="point">
+                    <g key={point.key}>
+                        <title>{point.tooltip}</title>
+                        <circle
+                            class="dot-total"
+                            cx={point.cx}
+                            cy={point.cyTotal}
+                            r="3.5"
+                        ></circle>
+                        <circle
+                            class="dot-invested"
+                            cx={point.cx}
+                            cy={point.cyInvested}
+                            r="3"
+                        ></circle>
+                    </g>
+                </template>
+            </svg>
+        </div>
+    </template>
+</template>

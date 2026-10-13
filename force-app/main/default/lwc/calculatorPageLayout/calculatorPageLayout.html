@@ -1,0 +1,67 @@
+<template>
+    <div class="page">
+        <div class="page__inner">
+            <template lwc:if={hasBreadcrumbs}>
+                <nav class="crumbs" aria-label="Breadcrumb">
+                    <ol class="crumbs__list">
+                        <template for:each={breadcrumbLinks} for:item="crumb">
+                            <li key={crumb.key} class="crumbs__item">
+                                <a class="crumbs__link" href={crumb.url}
+                                    >{crumb.label}</a
+                                >
+                                <span class="crumbs__divider" aria-hidden="true"
+                                    >/</span
+                                >
+                            </li>
+                        </template>
+                        <li class="crumbs__item crumbs__item_current">
+                            <span aria-current="page">{pageTitle}</span>
+                        </li>
+                    </ol>
+                </nav>
+            </template>
+
+            <header class="page__header">
+                <h1 class="page__title">{pageTitle}</h1>
+                <template lwc:if={hasSummary}>
+                    <p class="page__summary">{pageSummary}</p>
+                </template>
+            </header>
+
+            <!--
+                The calculator itself. Its own internal layout is untouched.
+                Experience Builder cannot drop a component into a slot, so the
+                SIP & Lumpsum calculator is the slot's default content: it
+                renders whenever nothing is slotted in. Composing this layout in
+                markup with your own child overrides it, and other calculator
+                pages can switch it off with "Hide Default Calculator".
+            -->
+            <section class="page__main">
+                <slot>
+                    <template lwc:if={showDefaultCalculator}>
+                        <c-sip-lumpsum-calculator></c-sip-lumpsum-calculator>
+                    </template>
+                </slot>
+            </section>
+
+            <!-- Related strip: @api chips, plus a slot for anything richer. -->
+            <template lwc:if={hasRelated}>
+                <aside class="related" aria-labelledby="related-heading">
+                    <h2 id="related-heading" class="related__heading">
+                        {relatedHeading}
+                    </h2>
+                    <ul class="related__list">
+                        <template for:each={relatedLinks} for:item="link">
+                            <li key={link.key}>
+                                <a class="related__chip" href={link.url}
+                                    >{link.label}</a
+                                >
+                            </li>
+                        </template>
+                    </ul>
+                </aside>
+            </template>
+            <slot name="related"></slot>
+        </div>
+    </div>
+</template>

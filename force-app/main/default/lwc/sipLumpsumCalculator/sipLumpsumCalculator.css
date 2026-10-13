@@ -1,0 +1,77 @@
+.calculator {
+    font-size: 0.8125rem;
+}
+
+/* Currency picker: unlabelled, sits on the title row at the top right. */
+.currency-picker {
+    width: 7.5rem;
+    padding-right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.mode-summary {
+    color: #444746;
+    max-width: 60rem;
+}
+
+.calculator-title {
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+}
+
+/* Tabs rendered as buttons: strip the native button chrome so SLDS tab
+   styling applies unchanged. */
+.tab-button {
+    background: none;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tab-button:focus-visible {
+    outline: 2px solid #0176d3;
+    outline-offset: -2px;
+}
+
+.slds-tabs_default__nav {
+    flex-wrap: wrap;
+}
+
+/* Compact numeric input sitting next to each slider label. */
+.value-input {
+    max-width: 9rem;
+}
+
+.compounding-frequency-input {
+    max-width: 14rem;
+}
+
+.result-panel {
+    border-radius: 0.25rem;
+}
+
+.headline {
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.inflation-line {
+    color: #444746;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.inflation-line__value {
+    font-weight: 700;
+    color: #1f1f1f;
+}
+
+.disclaimer {
+    margin: 0;
+    line-height: 1.4;
+}

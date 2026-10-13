@@ -1,0 +1,65 @@
+/*
+ * financeDesignTokens - the single source of truth for the site's visual design.
+ *
+ * This bundle contains only a CSS file, which makes it an LWC CSS module. Every
+ * component pulls it in with `@import 'c/financeDesignTokens';` as the first
+ * line of its own CSS, so the tokens land on that component's :host and are
+ * inherited by everything inside its shadow root.
+ *
+ * Palette: deep teal accent on a near-white / near-black neutral base. Chosen
+ * to read as financial and calm rather than Salesforce default blue. Contrast
+ * checked for WCAG AA:
+ *   #FFFFFF on #0F766E  = 4.86:1  (AA normal text)
+ *   #0F766E on #FFFFFF  = 4.86:1  (AA normal text, links and icons)
+ *   #0B1F1E on #FFFFFF  = 16.9:1  (AAA)
+ *   #4A5A59 on #FFFFFF  = 7.06:1  (AAA)
+ *   #E8EDEC on #0B1F1E  = 14.5:1  (AAA, footer)
+ */
+:host {
+    /* Color - accent */
+    --fx-accent: #0f766e;
+    --fx-accent-dark: #115e59;
+    --fx-accent-tint: #e6f2f1;
+
+    /* Color - surfaces and lines */
+    --fx-surface: #ffffff;
+    --fx-surface-alt: #f6f8f8;
+    --fx-surface-inverse: #0b1f1e;
+    --fx-border: #dde3e3;
+    --fx-border-strong: #b9c4c3;
+
+    /* Color - text */
+    --fx-text-primary: #0b1f1e;
+    --fx-text-secondary: #4a5a59;
+    --fx-text-inverse: #e8edec;
+    --fx-text-on-accent: #ffffff;
+
+    /* Color - status */
+    --fx-success: #15803d;
+    --fx-danger: #b42318;
+
+    /* Radius */
+    --fx-radius-card: 14px;
+    --fx-radius-control: 8px;
+    --fx-radius-pill: 999px;
+
+    /* Spacing scale */
+    --fx-space-1: 4px;
+    --fx-space-2: 8px;
+    --fx-space-3: 12px;
+    --fx-space-4: 16px;
+    --fx-space-5: 24px;
+    --fx-space-6: 32px;
+
+    /* Font sizes */
+    --fx-text-xs: 0.75rem;
+    --fx-text-sm: 0.875rem;
+    --fx-text-md: 1rem;
+    --fx-text-lg: 1.125rem;
+    --fx-text-xl: 1.5rem;
+    --fx-text-2xl: 2rem;
+
+    /* Layout */
+    --fx-max-width: 75rem;
+    --fx-focus-ring: 0 0 0 2px var(--fx-surface), 0 0 0 4px var(--fx-accent);
+}

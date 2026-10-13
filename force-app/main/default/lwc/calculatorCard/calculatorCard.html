@@ -1,0 +1,14 @@
+<template>
+    <a class={cardClass} href={cardHref} aria-disabled={cardAriaDisabled} onclick={handleClick}>
+        <span class="card__icon" aria-hidden="true">
+            <lightning-icon icon-name={iconName} size="small" variant="inverse"></lightning-icon>
+        </span>
+        <span class="card__category">{category}</span>
+        <h3 class="card__name">{name}</h3>
+        <p class="card__description">{description}</p>
+        <span class="card__action" aria-hidden="true">
+            {actionLabel}
+            <lightning-icon icon-name="utility:forward" size="xx-small"></lightning-icon>
+        </span>
+    </a>
+</template>
